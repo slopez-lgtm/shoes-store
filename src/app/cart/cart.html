@@ -1,1 +1,38 @@
-<p>cart works!</p>
+<div class="card p-3 shadow-sm">
+  <div *ngIf="(cartList$ | async) as cartList">
+    <div *ngIf="cartList.length === 0" class="alert alert-info text-center py-3 mb-0">
+      <small>⚠️ No hay zapatillas reservadas.</small>
+    </div>
+
+    <div *ngIf="cartList.length > 0" class="table-responsive">
+      <table class="table table-sm align-middle mb-0">
+        <thead>
+          <tr>
+            <th scope="col">Zapatilla</th>
+            <th scope="col" class="text-center">Cantidad</th>
+            <th scope="col" class="text-end">Precio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of cartList">
+            <td>
+              <span class="fw-bold">{{ item.name }}</span>
+              <br>
+              <small class="text-muted">{{ item.brand }}</small>
+            </td>
+            <td class="text-center">
+              <span class="badge bg-secondary">{{ item.quantity }}</span>
+            </td>
+            <td class="text-end">${{ item.price * item.quantity }}</td>
+          </tr>
+        </tbody>
+      </table>
+      
+    
+      <div class="d-grid mt-3">
+        <button class="btn btn-success btn-sm">Finalizar Compra</button>
+      </div>
+    </div>
+
+  </div>
+</div>

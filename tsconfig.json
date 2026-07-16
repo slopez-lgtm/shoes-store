@@ -4,6 +4,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "noImplicitOverride": true,
+    "rootDir": "./src",
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
