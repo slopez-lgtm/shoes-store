@@ -1,1 +1,64 @@
-<p>shoe-list works!</p>
+<div class="table-responsive">
+  <table class="table table-hover align-middle">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Imagen</th>
+        <th scope="col">Modelo</th>
+        <th scope="col">Marca</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Stock</th>
+        <th scope="col" class="text-center" style="width: 150px;">Cantidad</th>
+        <th scope="col" class="text-center">Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let shoe of shoes" [class.table-warning]="shoe.clearance">
+        
+        
+        <td>
+          <img [src]="shoe.image" [alt]="shoe.name" class="img-thumbnail" style="width: 60px; height: 60px; object-fit: cover;">
+        </td>
+
+        
+        <td>
+          <strong>{{ shoe.name }}</strong>
+          <span *ngIf="shoe.clearance" class="badge bg-danger ms-2">SALE!</span>
+        </td>
+
+        <td>{{ shoe.brand }}</td>
+        <td>${{ shoe.price }}</td>
+
+       
+        <td>
+          <span *ngIf="shoe.stock > 0; else noStockTemplate" class="badge bg-success">
+            {{ shoe.stock }} disponibles
+          </span>
+          <ng-template #noStockTemplate>
+            <span class="badge bg-secondary">SIN STOCK</span>
+          </ng-template>
+        </td>
+
+      
+        <td class="text-center">
+          <app-input-integer 
+            *ngIf="shoe.stock > 0"
+            [(quantity)]="shoe.quantity" 
+            [max]="shoe.stock"
+            (maxReached)="maxReached($event)">
+          </app-input-integer>
+        </td>
+
+        
+        <td class="text-center">
+          <button 
+            class="btn btn-sm btn-primary" 
+            [disabled]="shoe.quantity === 0"
+            (click)="addToCart(shoe)">
+            Reservar
+          </button>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>
