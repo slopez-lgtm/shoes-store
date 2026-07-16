@@ -1,1 +1,16 @@
-<p>input-integer works!</p>
+<div class="input-group input-group-sm mb-3" style="max-width: 120px;">
+  <div class="input-group-prepend">
+    <button class="btn btn-primary" (click)="downQuantity()">-</button>
+  </div>
+  <input 
+    type="text" 
+    [(ngModel)]="quantity" 
+    name="quantity" 
+    (keyup)="changeQuantity($event)" 
+    (change)="changeQuantity($event)" 
+    class="form-control text-center"
+  >
+  <div class="input-group-append">
+    <button class="btn btn-primary" (click)="upQuantity()">+</button>
+  </div>
+</div>

@@ -8,10 +8,11 @@ import { ShoeList } from './shoe-list/shoe-list';
 import { InputInteger } from './input-integer/input-integer';
 import { Cart } from './cart/cart';
 import { About } from './about/about';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [App, ShoeCatalog, ShoeList, InputInteger, Cart, About],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule,FormsModule],
   providers: [provideBrowserGlobalErrorListeners(), provideClientHydration()],
   bootstrap: [App],
 })
