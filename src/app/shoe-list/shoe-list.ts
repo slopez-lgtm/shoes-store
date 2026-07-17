@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Shoe } from './Shoe'; // Asegurate de que la ruta a tu Shoe.ts sea correcta
+import { Shoe } from './Shoe'; 
+import { ShoeCartService } from '../shoe-cart.service';
 
 @Component({
   selector: 'app-shoe-list',
@@ -9,7 +10,6 @@ import { Shoe } from './Shoe'; // Asegurate de que la ruta a tu Shoe.ts sea corr
 })
 export class ShoeList implements OnInit {
 
-  // Definimos nuestro array de prueba (Mock) directamente acá
   shoes: Shoe[] = [
     {
       name: 'Air Force 1',
@@ -24,7 +24,7 @@ export class ShoeList implements OnInit {
       name: 'Forum Low',
       brand: 'Adidas',
       price: 110,
-      stock: 3, // Ponemos stock bajo para probar el límite
+      stock: 3,
       image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=150&auto=format&fit=crop&q=60',
       clearance: false,
       quantity: 0
@@ -33,39 +33,27 @@ export class ShoeList implements OnInit {
       name: 'Suede Classic',
       brand: 'Puma',
       price: 85,
-      stock: 0, // Probamos el comportamiento sin stock
+      stock: 0,
       image: 'https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=150&auto=format&fit=crop&q=60',
       clearance: false,
       quantity: 0
     }
   ];
 
-  // El constructor queda completamente vacío, sin servicios inyectados
-  constructor() { }
+  constructor(private cartService: ShoeCartService) { }
 
   ngOnInit(): void {
   }
 
-  // Método que escucha el cambio de cantidad desde el input-integer
-  onQuantityChange(shoe: Shoe, newQuantity: number): void {
-    shoe.quantity = newQuantity;
-  }
-
-  // Cuando el usuario hace clic en "Reservar", procesamos la compra de forma local
   addToCart(shoe: Shoe): void {
     if (shoe.quantity > 0) {
-      console.log('Click en comprar zapatilla (Simulado):', { name: shoe.name, quantity: shoe.quantity });
-      
-      // Restamos el stock localmente
+      this.cartService.addToCart(shoe);
       shoe.stock -= shoe.quantity;
-      
-      // Reseteamos la cantidad elegida a 0
       shoe.quantity = 0;
     }
   }
 
-  // Alerta cuando se alcanza el stock máximo disponible
-  maxReached(m: string) {
-    alert(m);
+  maxReached(message: string): void {
+    alert(message);
   }
 }

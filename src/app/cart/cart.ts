@@ -10,12 +10,19 @@ import { ShoeCartService } from '../shoe-cart.service';
   styleUrl: './cart.scss',
 })
 export class Cart implements OnInit {
+  
   cartList$: Observable<Shoe[]>;
 
-  constructor(private cart: ShoeCartService) {
-    this.cartList$ = this.cart.cartList.asObservable();
+  constructor(private cartStore: ShoeCartService) {
+    this.cartList$ = this.cartStore.cartList.asObservable();
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  
+  getTotal(items: Shoe[] | null): number {
+    if (!items) return 0;
+   
+    return items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
   }
 }
