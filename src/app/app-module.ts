@@ -9,10 +9,11 @@ import { InputInteger } from './input-integer/input-integer';
 import { Cart } from './cart/cart';
 import { About } from './about/about';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [App, ShoeCatalog, ShoeList, InputInteger, Cart, About],
-  imports: [BrowserModule, AppRoutingModule,FormsModule],
+  imports: [BrowserModule, AppRoutingModule,HttpClientModule, FormsModule],
   providers: [provideBrowserGlobalErrorListeners(), provideClientHydration()],
   bootstrap: [App],
 })
